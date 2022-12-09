@@ -17,6 +17,16 @@ con.connect((err)=>{
         console.warn("error in connection")
     }
 });
+app.use(express.json());
+app.use((err, req, res, next) => {
+  console.log(err.stack);
+  console.log(err.name);
+  console.log(err.code);
+
+  res.status(500).json({
+    message: "Something went rely wrong",
+  });
+});
 app.use(cors());
 app.use(express.json());
 app.get("/data", (req, resp) => {
